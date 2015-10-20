@@ -1,0 +1,80 @@
+%\documentclass[a4paper]{article}
+\documentclass{standalone}
+	
+\usepackage{amssymb,amsmath}
+\usepackage{tikz}
+\usetikzlibrary{graphdrawing.trees}
+
+% add the following two lines to your document to get bigger arrows
+\usetikzlibrary{arrows.meta}
+\tikzset{>={Latex[width=3mm,length=3mm]}}
+
+\newcommand{\R}{\mathbb{R}}
+
+\begin{document}
+
+\begin{tikzpicture}[level distance = 5cm, thick, ->]
+
+  \node[text width=14cm] at (0,2.5) 
+    {\emph{Notation}: $Y = (Y_1, Y_2, \dots, Y_n)^T \in \R^N$ and 
+    $U = (U_1, U_2, \dots, U_q)^T \in \R^q$ are random vectors (response 
+    and random/mixed effects); $\beta\in\R^p$ is the vector of fixed effects; 
+    $X \in \R^{n\times p}$ and $Z \in \R^{n\times q}$ are model matrices, where 
+    $x_i^T$ or $z_i^T$ denote the $i$th row of $X$ or $Z$ respectively.};
+  \node[draw, align=left] at (0,0) 
+    {Generalized linear mixed model (GLMM):\\ \vspace{1pt} \\
+    $(Y_i | U=u) \sim \mathrm{indep.} f_{Y_i | U} (y_i | u)$ for $i\in\{1,2,\dots,n\}$, $U \sim f_U(u)$.\\
+    $f_{Y_i | U}(y_i | u) = h(y_i) \exp\left( \langle T(y_i), \eta \rangle - A(\eta) \right)$,\\
+    $\mu_i = \mathrm{E}(Y_i | U=u) = f(\eta)$,\\
+    $g\left(\mu_i\right) = x_i^T \beta + z_i^T u$.}
+  child { node[draw, align=left] 
+            {Linear mixed model (LMM):\\ \vspace{1pt} \\
+            $(Y|U=u) \sim \mathcal{N}\left(X\beta + Zu, \sigma^2 I\right)$,\\
+            $U \sim \mathcal{N}(0, V)$.} 
+          child [missing]
+          child [missing]
+          child [missing]
+          child [missing]
+          child [missing]
+          child { node[draw, align=left] (LM) 
+                    {Linear model (LM):\\ \vspace{1pt} \\
+                    $Y \sim \mathcal{N}\left(X\beta, \sigma^2 I\right)$.} 
+                  child { node[draw, align=left] (LASSO)
+                            {LASSO:\\ \vspace{1pt} \\
+                            $\mathrm{E}(Y_i) = X\beta$,\\
+                            $\hat{\beta} = \mathrm{argmin}_{b\in\R^p} \left\{ \frac{1}{2n} \|y - Xb\|_2^2 + \lambda \|b\|_1 \right\}$.}
+                          % edge label for LM-LASSO edge
+                          edge from parent[<-] node[left, draw=none] {Normality, $\lambda=0$} }
+                  child [missing]
+                  child [missing]
+                  child [missing]
+                  child [missing]
+                  child { node[draw, align=left] (Ridge)
+                            {Ridge regression:\\ \vspace{1pt} \\
+                            $\mathrm{E}(Y_i) = X\beta$,\\
+                            $\hat{\beta} = \mathrm{argmin}_{b\in\R^p} \left\{ \frac{1}{2n} \|y - Xb\|_2^2 + \lambda \|b\|_2^2 \right\}$.}
+                          % edge label for LM-Ridge edge
+                          edge from parent[<-] node[right, draw=none] {Normality, $\lambda=0$} }
+                  % edge label for LMM-LM edge
+                  edge from parent node[left,draw=none] {$Z=0$}}
+          % edge label for GLMM-LMM edge
+          edge from parent node[left,draw=none] {Normality} }
+  child [missing]
+  child [missing]
+  child [missing]
+  child { node[draw, align=left] (GLM) 
+            {Generalized linear model (GLM):\\ \vspace{1pt} \\
+            $Y_i \sim \mathrm{indep.} f_{Y_i}(y_i)$ for $i\in\{1,2,\dots,n\}$,\\
+            $f_{Y_i}(y_i) = h(y_i) \exp\left( \langle T(y_i), \eta \rangle - A(\eta) \right)$,\\
+            $\mu_i = \mathrm{E}(Y_i) = f(\eta)$,\\
+            $g\left(\mu_i\right) = x_i^T \beta$.} 
+          % edge label for GLMM-GLM edge
+          edge from parent node[right,draw=none] {$Z=0$} };
+  % edge GLM-LM
+  \draw (GLM.south) to node[right, draw=none] {Normality} (LM.north);
+ 
+\end{tikzpicture}
+
+\end{document}
+
+
