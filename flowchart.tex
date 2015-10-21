@@ -48,7 +48,7 @@
                     UMVU and BLUE.} 
                   child { node[draw, align=left] (LASSO)
                             {LASSO:\\ \vspace{1pt} \\
-                            $\mathrm{E}(Y_i) = X\beta$, tuning parameter $\lambda \geq 0$,\\
+                            $\mathrm{E}(Y) = X\beta$, tuning parameter $\lambda \geq 0$,\\
                             $\hat{\beta} = \mathrm{argmin}_{b\in\R^p} \left\{ \frac{1}{2n} \|y - Xb\|_2^2 + \lambda \|b\|_1 \right\}$.}
                           child [missing]
                           child [missing]
@@ -57,7 +57,7 @@
                           child [missing]
                           child { node[draw, align=left] (Elastic)
                                     {Elastic net:\\ \vspace{1pt} \\
-                                    $\mathrm{E}(Y_i) = X\beta$, tuning parameters $\lambda \geq 0$ and $\alpha\in[0,1]$,\\
+                                    $\mathrm{E}(Y) = X\beta$, tuning parameters $\lambda \geq 0$ and $\alpha\in[0,1]$,\\
                                     $\hat{\beta} = \mathrm{argmin}_{b\in\R^p} \left\{ \frac{1}{2} \|y - Xb\|_2^2 + \lambda \left[ \frac{1}{2}(1-\alpha)\|b\|_2^2 + \alpha\|b\|_1 \right] \right\}$.} 
                                   % edge label for Elastic net-LASSO edge
                                   edge from parent[<-] node[left, draw=none] {$\alpha=1$} }
@@ -69,7 +69,7 @@
                   child [missing]
                   child { node[draw, align=left] (Ridge)
                             {Ridge regression:\\ \vspace{1pt} \\
-                            $\mathrm{E}(Y_i) = X\beta$, tuning parameter $\lambda \geq 0$,\\
+                            $\mathrm{E}(Y) = X\beta$, tuning parameter $\lambda \geq 0$,\\
                             $\hat{\beta} = \mathrm{argmin}_{b\in\R^p} \left\{ \frac{1}{2n} \|y - Xb\|_2^2 + \lambda \|b\|_2^2 \right\}$.\\
                             \emph{Closed form solution:}\\
                             $\hat{\beta} = (X^T X + \lambda I)^{-1} X^T y$.}

@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2015/dev/Debian) (rev 4971)  (format=lualatex 2015.5.12)  20 OCT 2015 19:22
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2015/dev/Debian) (rev 4971)  (format=lualatex 2015.5.12)  20 OCT 2015 20:30
  restricted \write18 enabled.
 **flowchart.tex
 (./flowchart.tex
@@ -549,11 +549,11 @@ Missing character: There is no t (U+0074) in font nullfont!
 Here is how much of LuaTeX's memory you used:
  13799 strings out of 493787
  100000,552014 words of node,token memory allocated
- 18487 words of node memory still in use:
-   438 hlist, 61 vlist, 6 rule, 57 disc, 93 math, 771 glue, 142 kern, 12 penalty
-, 1167 glyph, 343 glue_spec, 1 write, 1 local_par, 235 pdf_literal, 4 pdf_colors
+ 18457 words of node memory still in use:
+   435 hlist, 61 vlist, 6 rule, 57 disc, 93 math, 771 glue, 145 kern, 12 penalty
+, 1164 glyph, 343 glue_spec, 1 write, 1 local_par, 235 pdf_literal, 4 pdf_colors
 tack nodes
-   avail lists: 2:35,3:249,4:890,5:141,6:1176,7:5,9:500,10:57
+   avail lists: 2:35,3:249,4:890,5:144,6:1173,7:5,9:497,10:57
  17013 multiletter control sequences out of 65536+600000
  33 fonts using 1308723 bytes
  55i,16n,72p,424b,1474s stack positions out of 5000i,500n,10000p,200000b,100000s
@@ -569,7 +569,7 @@ onts/cm/cmsy7.pfb><</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmti10.pfb><</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/
 msbm10.pfb><</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/m
 sbm7.pfb>
-Output written on flowchart.pdf (1 page, 112017 bytes).
+Output written on flowchart.pdf (1 page, 111990 bytes).
 
 PDF statistics: 59 PDF objects out of 1000 (max. 8388607)
  43 compressed objects within 1 object stream
