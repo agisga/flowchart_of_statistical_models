@@ -31,7 +31,7 @@
   child { node[draw, align=left] 
             {Linear mixed model (LMM):\\ \vspace{1pt} \\
             $(Y|U=u) \sim \mathcal{N}\left(X\beta + Zu, \sigma^2 I\right)$,\\
-            $U \sim \mathcal{N}(0, \Sigma(\theta))$.\\
+            $U \sim \mathcal{N}(0, \Sigma_\theta)$.\\
             \emph{Solution:}\\
             $\hat{\beta}_{\mathrm{ML}} = (X^T \hat{V}^{-1} X)^{-1} X^T \hat{V}^{-1} y$ is MLE, where \\
             $\hat{V} = Z\Sigma_{\hat{\theta}_{\mathrm{ML}}} Z^T + \hat{\sigma}_{\mathrm{ML}}^2 I$ is MLE of $\mathrm{Var}(Y)$.}
