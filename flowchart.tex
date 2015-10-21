@@ -13,12 +13,13 @@
 
 \begin{document}
 
-\begin{tikzpicture}[level distance = 5cm, thick, ->]
+\begin{tikzpicture}[level distance = 4cm, thick, ->]
 
-  \node[text width=14cm] at (0,2.5) 
+  \node[text width=15cm] at (0,2.5) 
     {\emph{Notation}: $Y = (Y_1, Y_2, \dots, Y_n)^T \in \R^N$ and 
     $U = (U_1, U_2, \dots, U_q)^T \in \R^q$ are random vectors (response 
-    and random/mixed effects); $\beta\in\R^p$ is the vector of fixed effects; 
+    and random/mixed effects); their realizations are denoted $y = (y_1, y_2, \dots, y_n)^T$ 
+    and $u = (u_1, u_2, \dots, u_q)^T$; $\beta\in\R^p$ is the vector of fixed effects; 
     $X \in \R^{n\times p}$ and $Z \in \R^{n\times q}$ are model matrices, where 
     $x_i^T$ or $z_i^T$ denote the $i$th row of $X$ or $Z$ respectively.};
   \node[draw, align=left] at (0,0) 
@@ -30,7 +31,10 @@
   child { node[draw, align=left] 
             {Linear mixed model (LMM):\\ \vspace{1pt} \\
             $(Y|U=u) \sim \mathcal{N}\left(X\beta + Zu, \sigma^2 I\right)$,\\
-            $U \sim \mathcal{N}(0, V)$.} 
+            $U \sim \mathcal{N}(0, \Sigma(\theta))$.\\
+            \emph{Solution:}\\
+            $\hat{\beta}_{\mathrm{ML}} = (X^T \hat{V}^{-1} X)^{-1} X^T \hat{V}^{-1} y$ is MLE, where \\
+            $\hat{V} = Z\Sigma_{\hat{\theta}_{\mathrm{ML}}} Z^T + \hat{\sigma}_{\mathrm{ML}}^2 I$ is MLE of $\mathrm{Var}(Y)$.}
           child [missing]
           child [missing]
           child [missing]
@@ -38,11 +42,25 @@
           child [missing]
           child { node[draw, align=left] (LM) 
                     {Linear model (LM):\\ \vspace{1pt} \\
-                    $Y \sim \mathcal{N}\left(X\beta, \sigma^2 I\right)$.} 
+                    $Y \sim \mathcal{N}\left(X\beta, \sigma^2 I\right)$.\\
+                    \emph{Closed form solution:}\\
+                    $\hat{\beta} = (X^T X)^{-1} X^T y$ is MLE,\\
+                    UMVU and BLUE.} 
                   child { node[draw, align=left] (LASSO)
                             {LASSO:\\ \vspace{1pt} \\
-                            $\mathrm{E}(Y_i) = X\beta$,\\
+                            $\mathrm{E}(Y_i) = X\beta$, tuning parameter $\lambda \geq 0$,\\
                             $\hat{\beta} = \mathrm{argmin}_{b\in\R^p} \left\{ \frac{1}{2n} \|y - Xb\|_2^2 + \lambda \|b\|_1 \right\}$.}
+                          child [missing]
+                          child [missing]
+                          child [missing]
+                          child [missing]
+                          child [missing]
+                          child { node[draw, align=left] (Elastic)
+                                    {Elastic net:\\ \vspace{1pt} \\
+                                    $\mathrm{E}(Y_i) = X\beta$, tuning parameters $\lambda \geq 0$ and $\alpha\in[0,1]$,\\
+                                    $\hat{\beta} = \mathrm{argmin}_{b\in\R^p} \left\{ \frac{1}{2} \|y - Xb\|_2^2 + \lambda \left[ \frac{1}{2}(1-\alpha)\|b\|_2^2 + \alpha\|b\|_1 \right] \right\}$.} 
+                                  % edge label for Elastic net-LASSO edge
+                                  edge from parent[<-] node[left, draw=none] {$\alpha=1$} }
                           % edge label for LM-LASSO edge
                           edge from parent[<-] node[left, draw=none] {Normality, $\lambda=0$} }
                   child [missing]
@@ -51,14 +69,17 @@
                   child [missing]
                   child { node[draw, align=left] (Ridge)
                             {Ridge regression:\\ \vspace{1pt} \\
-                            $\mathrm{E}(Y_i) = X\beta$,\\
-                            $\hat{\beta} = \mathrm{argmin}_{b\in\R^p} \left\{ \frac{1}{2n} \|y - Xb\|_2^2 + \lambda \|b\|_2^2 \right\}$.}
+                            $\mathrm{E}(Y_i) = X\beta$, tuning parameter $\lambda \geq 0$,\\
+                            $\hat{\beta} = \mathrm{argmin}_{b\in\R^p} \left\{ \frac{1}{2n} \|y - Xb\|_2^2 + \lambda \|b\|_2^2 \right\}$.\\
+                            \emph{Closed form solution:}\\
+                            $\hat{\beta} = (X^T X + \lambda I)^{-1} X^T y$.}
                           % edge label for LM-Ridge edge
                           edge from parent[<-] node[right, draw=none] {Normality, $\lambda=0$} }
                   % edge label for LMM-LM edge
                   edge from parent node[left,draw=none] {$Z=0$}}
           % edge label for GLMM-LMM edge
           edge from parent node[left,draw=none] {Normality} }
+  child [missing]
   child [missing]
   child [missing]
   child [missing]
@@ -72,6 +93,9 @@
           edge from parent node[right,draw=none] {$Z=0$} };
   % edge GLM-LM
   \draw (GLM.south) to node[right, draw=none] {Normality} (LM.north);
+  % edge Elastic net-Ridge regression
+  \draw (Elastic.north) to node[right, draw=none] {$\alpha=0$} (Ridge.south);
+  %\path [arrow] (Elastic.north) -- (Ridge.south)
  
 \end{tikzpicture}
 
